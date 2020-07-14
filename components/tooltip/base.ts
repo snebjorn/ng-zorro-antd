@@ -166,7 +166,18 @@ export abstract class NzTooltipBaseDirective implements OnChanges, OnDestroy, Af
     this.warnDeprecationIfNeeded(changes.nzContent && !this.specificContent, 'nzContent', 'nzPopoverContent', 'nz-popover', false);
     this.warnDeprecationIfNeeded(changes.nzPlacement && !this.specificPlacement, 'nzPlacement', 'nzTooltipPlacement');
     this.warnDeprecationIfNeeded(changes.nzTrigger && !this.specificTrigger, 'nzTrigger', 'nzTooltipTrigger');
-    this.warnDeprecationIfNeeded(changes.nzVisible && !this.specificVisible, 'nzVisible', 'nzTooltipVisible');
+    const specificComponentName = this.constructor.name;
+    const nzVisibleNewPropertyMap = {
+      'NzTooltipDirective': 'nzTooltipVisible',
+      'NzPopoverDirective': 'nzPopoverVisible',
+      'NzPopconfirmDirective': 'nzPopconfirmVisible',
+    };
+    const componentTagMap = {
+      'NzTooltipDirective': 'nzTooltipVisible',
+      'NzPopoverDirective': 'nzPopoverVisible',
+      'NzPopconfirmDirective': 'nzPopconfirmVisible',
+    };
+    this.warnDeprecationIfNeeded(changes.nzVisible && !this.specificVisible, 'nzVisible', nzVisibleNewPropertyMap[specificComponentName], componentTagMap[specificComponentName], false);
     this.warnDeprecationIfNeeded(
       changes.nzMouseEnterDelay && !this.specificMouseEnterDelay,
       'nzMouseEnterDelay',
